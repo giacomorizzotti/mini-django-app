@@ -19,7 +19,14 @@ class Website:
         tax_id=None,
         pers_id=None,
 
-        open_hours=None,
+        mini_css_cdn='https://cdn.jsdelivr.net/gh/giacomorizzotti/mini@main/css/mini.min.css',
+        mini_js_cdn='https://cdn.jsdelivr.net/gh/giacomorizzotti/mini@main/js/mini.js',
+        mini_gdpr=False,
+        mini_gdpr_cdn='https://github.com/giacomorizzotti/mini/blob/main/js/gdpr.js',
+        mini_slider=False,
+        mini_slider_cdn='https://cdn.jsdelivr.net/gh/giacomorizzotti/mini@main/js/slider.js',
+        mini_debug=False,
+        mini_debug_cdn='https://cdn.jsdelivr.net/gh/giacomorizzotti/mini@main/js/debug.js',
 
         logo_height=None,
         scroll_logo_height=None,
@@ -32,7 +39,6 @@ class Website:
         third_color_dark=None,
         fourth_color=None,
         fourth_color_dark=None,
-        fourth_color_darker=None,
         link_color=None,
         link_hover_color=None,
         success_color=None,
@@ -64,8 +70,16 @@ class Website:
         self.pec_email = pec_email
         self.tax_id = tax_id
         self.pers_id = pers_id
-
-        self.open_hours = open_hours
+        
+        self.mini_css_cdn=mini_css_cdn
+        self.mini_js_cdn=mini_js_cdn
+        
+        self.mini_gdpr=mini_gdpr
+        self.mini_gdpr_cdn=mini_gdpr_cdn
+        self.mini_slider=mini_slider
+        self.mini_slider_cdn=mini_slider_cdn
+        self.mini_debug=mini_debug
+        self.mini_debug_cdn=mini_debug_cdn
 
         self.logo_height = logo_height
         self.scroll_logo_height = scroll_logo_height
@@ -78,7 +92,6 @@ class Website:
         self.third_color_dark = third_color_dark
         self.fourth_color = fourth_color
         self.fourth_color_dark = fourth_color_dark
-        self.fourth_color_darker = fourth_color_darker
         self.link_color = link_color
         self.link_hover_color = link_hover_color
         self.success_color = success_color
@@ -93,80 +106,56 @@ class Website:
         
         self.AOS = AOS
 
+        self.colors = {}
         self.css_root_vars = {}
-
+        
         if self.logo_height:
             self.css_root_vars['--logo-height'] = self.logo_height
         if self.scroll_logo_height:
             self.css_root_vars['--scroll-logo-height'] = self.scroll_logo_height
-
-        if self.main_color:
-            self.css_root_vars['--main-color'] = self.main_color
-        if self.main_color_dark:
-            self.css_root_vars['--main-color-dark'] = self.main_color_dark
-        if self.second_color:
-            self.css_root_vars['--second-color'] = self.second_color
-        if self.second_color_dark:
-            self.css_root_vars['--second-color-dark'] = self.second_color_dark
-        if self.third_color:
-            self.css_root_vars['--third-color'] = self.third_color
-        if self.third_color_dark:
-            self.css_root_vars['--third-color-dark'] = self.third_color_dark
-        if self.fourth_color:
-            self.css_root_vars['--fourth-color'] = self.fourth_color
-        if self.fourth_color_dark:
-            self.css_root_vars['--fourth-color-dark'] = self.fourth_color_dark
-        if self.link_color:
-            self.css_root_vars['--link-color'] = self.link_color
-        if self.link_hover_color:
-            self.css_root_vars['--link-hover-color'] = self.link_hover_color
-        if self.success_color:
-            self.css_root_vars['--success'] = self.success_color
-        if self.warning_color:
-            self.css_root_vars['--warning'] = self.warning_color
-        if self.danger_color:
-            self.css_root_vars['--danger'] = self.danger_color
-        if self.gingerbread_color:
-            self.css_root_vars['--ginger-bread'] = self.gingerbread_color
-        if self.acid_green:
-            self.css_root_vars['--acid-green'] = self.acid_green
-        if self.pulse_color:
-            self.css_root_vars['--pulse-color'] = self.pulse_color
-        if self.main_color_transparent:
-            self.css_root_vars['--main-color-transp'] = self.main_color_transparent
-
-        self.colors = {}
-
+            
         if self.main_color:
             self.colors['main_color'] = self.main_color
+            self.css_root_vars['--main-color'] = self.main_color
         if self.main_color_dark:
             self.colors['main_color_dark'] = self.main_color_dark
+            self.css_root_vars['--main-color-dark'] = self.main_color_dark
         if self.second_color:
             self.colors['second_color'] = self.second_color
+            self.css_root_vars['--second-color'] = self.second_color
         if self.second_color_dark:
             self.colors['second_color_dark'] = self.second_color_dark
+            self.css_root_vars['--second-color-dark'] = self.second_color_dark
         if self.third_color:
             self.colors['third_color'] = self.third_color
+            self.css_root_vars['--third-color'] = self.third_color
         if self.third_color_dark:
             self.colors['third_color_dark'] = self.third_color_dark
+            self.css_root_vars['--third-color-dark'] = self.third_color_dark
         if self.fourth_color:
             self.colors['fourth_color'] = self.fourth_color
+            self.css_root_vars['--fourth-color'] = self.fourth_color
         if self.fourth_color_dark:
             self.colors['fourth_color_dark'] = self.fourth_color_dark
-        if self.fourth_color_darker:
-            self.colors['fourth_color_darker'] = self.fourth_color_darker
+            self.css_root_vars['--fourth-color-dark'] = self.fourth_color_dark
         if self.link_color:
             self.colors['link_color'] = self.link_color
+            self.css_root_vars['--link-color'] = self.link_color
         if self.link_hover_color:
             self.colors['link_hover_color'] = self.link_hover_color
+            self.css_root_vars['--link-hover-color'] = self.link_hover_color
         if self.success_color:
             self.colors['success_color'] = self.success_color
+            self.css_root_vars['--success'] = self.success_color
         if self.warning_color:
             self.colors['warning_color'] = self.warning_color
+            self.css_root_vars['--warning'] = self.warning_color
         if self.danger_color:
             self.colors['danger_color'] = self.danger_color
+            self.css_root_vars['--danger'] = self.danger_color
         if self.gingerbread_color:
             self.colors['gingerbread_color'] = self.gingerbread_color
+            self.css_root_vars['--ginger-bread'] = self.gingerbread_color
         if self.acid_green:
             self.colors['acid_green'] = self.acid_green
         if self.pulse_color:
@@ -203,8 +192,22 @@ class Website:
     def get_pers_id(self):
         return self.pers_id
     
-    def get_open_hours(self):
-        return self.open_hours
+    def get_mini_css_cdn(self):
+        return self.mini_css_cdn
+    def get_mini_js_cdn(self):
+        return self.mini_js_cdn
+    def get_mini_gdpr(self):
+        return self.mini_gdpr
+    def get_mini_gdpr_cdn(self):
+        return self.mini_gdpr_cdn
+    def get_mini_slider(self):
+        return self.mini_slider
+    def get_mini_slider_cdn(self):
+        return self.mini_slider_cdn
+    def get_mini_debug(self):
+        return self.mini_debug
+    def get_mini_debug_cdn(self):
+        return self.mini_debug_cdn
     
     def get_company_variables(self):
         company_variables = {
@@ -241,3 +244,6 @@ class Website:
     
     def get_css_root_vars(self):
         return self.css_root_vars
+    
+    def get_cdn(self):
+        return self.dev_cdn

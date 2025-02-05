@@ -79,6 +79,8 @@
         gtag("config", "{{ analytics_code }}");
     </script>
     {% endblock %}
+    
+    <link rel="stylesheet" href="{{ mini_css_cdn }}">
 
     {% if css_root_vars %}
     <style>
@@ -89,9 +91,6 @@
         }
     </style>
     {% endif %}
-    
-    {% block top_js %}
-    {% endblock %}
 
 </head>
 
@@ -383,24 +382,22 @@
     <script>AOS.init();</script>
     {% endif %}
 
-    {% block mini_footer_js %}
-    <script type="text/javascript" src="https://mini.uwa.agency/js/mini.js"></script>
-    {% comment %}<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/giacomorizzotti/mini@main/js/mini.js"></script>{% endcomment %}
-    {% endblock %}
+    <script type="text/javascript" src="{{ mini_js_cdn }}"></script>
 
     {% block bottom_js %}
     {% endblock %}
 
     {% comment %}<script type="text/javascript" src="{% static 'js/this.js' %}"></script>{% endcomment %}
 
-    {# Include HTMX #}
-    {% block footer_htmx %}
-    {% comment %}<script src="https://unpkg.com/htmx.org@1.8.6" integrity="sha384-Bj8qm/6B+71E6FQSySofJOUjA/gq330vEqjFx9LakWybUySyI1IQHwPtbTU7bNwx" crossorigin="anonymous"></script>{% endcomment %}
-    {% endblock %}
-
-    {% block footer_privacy_scripts %}
-    <script type="text/javascript" src="https://mini.uwa.agency/js/gdpr.js"></script>
-    {% endblock %}
+    {% if mini_slider is not False %}
+    <script type="text/javascript" src="{{ mini_slider_cdn }}"></script>
+    {% endif %}
+    {% if mini_gdpr is not False %}
+    <script type="text/javascript" src="{{ mini_gdpr_cdn }}"></script>
+    {% endif %}
+    {% if mini_debug is not False %}
+    <script type="text/javascript" src="{{ mini_debug_cdn }}"></script>
+    {% endif %}
 
 </body>
 </html>

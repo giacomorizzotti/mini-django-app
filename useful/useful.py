@@ -16,36 +16,28 @@ def randomCode(n):
     return ''.join(random.SystemRandom().choice(string.ascii_uppercase + string.digits) for _ in range(n))
 
 def basicContext(request, context):
-
-    mgmt_app = 'aroma_management_backoffice.apps.AromaManagementBackofficeConfig' in settings.INSTALLED_APPS
-    context['mgmt_app'] = mgmt_app
+    
+    context['mini_css_cdn'] = mini.get_mini_css_cdn()
+    context['mini_js_cdn'] = mini.get_mini_js_cdn()
+    if mini.get_mini_gdpr() is True:
+        context['gdpr'] = True
+        context['mini_gdpr_cdn'] = mini.get_mini_gdpr_cdn()
+    if mini.get_mini_slider() is True:
+        context['slider'] = True
+        context['mini_slider_cdn'] = mini.get_mini_slider_cdn()
+    if mini.get_mini_debug() is True:
+        context['debug'] = True
+        context['mini_debug_cdn'] = mini.get_mini_debug_cdn()
 
     gdpr_app = 'gdpr.apps.GdprConfig' in settings.INSTALLED_APPS
     context['gdpr_app'] = gdpr_app
-
-    aroma_menu_app = 'aroma_menu.apps.AromaMenuConfig' in settings.INSTALLED_APPS
-    context['aroma_menu_app'] = aroma_menu_app
-
-    aroma_reserv_app = 'aroma_reserv.apps.AromaReservConfig' in settings.INSTALLED_APPS
-    context['aroma_reserv_app'] = aroma_reserv_app
-
-    aroma_reserv_table_app = 'aroma_reserv_table.apps.AromaReservTableConfig' in settings.INSTALLED_APPS
-    context['aroma_reserv_table_app'] = aroma_reserv_table_app
-
-    aroma_reserv_event_app = 'aroma_reserv_event.apps.AromaReservEventConfig' in settings.INSTALLED_APPS
-    context['aroma_reserv_event_app'] = aroma_reserv_event_app
-
-    aroma_reserv_pheno_stage_dinner_app = 'aroma_reserv_pheno_stage_dinner.apps.AromaReservPhenoStageDinnerConfig' in settings.INSTALLED_APPS
-    context['aroma_reserv_stage_dinner_app'] = aroma_reserv_pheno_stage_dinner_app
-    
-    aroma_shop_app = 'aroma_shop.apps.AromaShopConfig' in settings.INSTALLED_APPS
-    context['aroma_shop_app'] = aroma_shop_app
 
     context['webapp_title'] = mini.get_title()
     context['company_variables'] = mini.get_company_variables()
     context['theme_variables'] = mini.get_theme_variables()
 
     context['css_root_vars'] = mini.get_css_root_vars()
+    
     if mini.main_color:
         context['theme_color'] = mini.main_color
 
