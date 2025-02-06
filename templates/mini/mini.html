@@ -35,10 +35,7 @@
     {% endif %}
     {% if favicon is not False %}<link rel="apple-touch-icon" href="{% static 'favicon.ico' %}">{% endif %}
 
-    {% block mini_header_css %}
-    {% comment %}<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/giacomorizzotti/mini@main/css/mini.min.css">{% endcomment %} 
-    <link rel="stylesheet" type="text/css" href="https://mini.uwa.agency/css/mini.min.css">
-    {% endblock %}
+    <link rel="stylesheet" href="{{ mini_css_cdn }}">
     
     {% block header_css %}
     {% comment %}<link rel="stylesheet" type="text/css" href="{% static 'css/this.css' %}">{% endcomment %}
@@ -79,14 +76,12 @@
         gtag("config", "{{ analytics_code }}");
     </script>
     {% endblock %}
-    
-    <link rel="stylesheet" href="{{ mini_css_cdn }}">
 
     {% if css_root_vars %}
     <style>
         :root {
             {% for var, color in css_root_vars.items %}
-            {{ var }}: {{ color }};
+            {{ var }}: {{ color|safe }};
             {% endfor %}
         }
     </style>
@@ -158,6 +153,7 @@
 
     <div class="sheet">
 
+        {% block right-sidebar %}
         <aside id="side-right" class="">
             
             {% block main_nav %}
@@ -188,15 +184,12 @@
             </nav>
             {% endblock %}
 
-            {% block aroma_menu_nav %}{% endblock %}
-
-            {% block aroma_reserv_nav %}{% endblock %}
-
-            {% block aroma_cart_nav %}{% endblock %}
-
         </aside>
+        {% endblock %}
 
+        {% block left-sidebar %}
         <aside id="side-left" class="">{% block admin_nav %}{% endblock %}</aside>
+        {% endblock %}
 
         <main class="fh {{ main_classes }}">
             
@@ -209,7 +202,6 @@
                 <div class="container">
                     <div class="boxes space-top menu-open-p-0">
                         <div class="box box-100">
-                            <div class="space space-2"></div>
                             {% if page_title %}<h1 class="m-0">{{ page_title|safe|capfirst }}</h1>{% endif %}
                             {% if page_subtitle %}<h2 class="m-0">{{ page_subtitle|capfirst }}</h2>{% endif %}
                         </div>
@@ -306,7 +298,7 @@
 
             {% if user.is_authenticated %}
             <li class="action-group">
-                <a id="admin-menu-toggle" href="#add-family-finances" class="" >
+                <a id="admin-menu-toggle" href="" class="" >
                     <i class="iconoir-settings icon"></i>
                     <span class="label">Settings</span>
                 </a>

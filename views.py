@@ -3,15 +3,14 @@ from django.contrib.auth.models import User, Group
 from django.contrib.auth import authenticate, login, logout, get_user_model
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.decorators import login_required
-from .useful.useful import basicContext
 from django.contrib import messages
 from django.utils.translation import gettext as _
-
+from .webapp import Mini
 
 # home
 def home(request, exception=None):
     context = {}
-    basicContext(request, context)
+    Mini.basic_context(Mini(), request, context)
     context['title'] = _('home')
     context['main_classes'] = 'space-top'
     response = render(request, 'mini/html.html', context)
@@ -21,14 +20,14 @@ def home(request, exception=None):
 def loginPage(request):
     
     context = {}
-    basicContext(request, context)
+    Mini.basic_context(Mini(), request, context)
     context['title'] = _('login')
     context['page_title'] = _('login')
     context['main_classes'] = 'space-top'
     context['submit_button'] = _('login')
 
     if request.user.is_authenticated:
-        messages.success(request, _('you are already logged'))
+        messages.success(request, _('you are already logged in'))
         response = redirect('/')
     else:
      
@@ -56,8 +55,7 @@ def loginPage(request):
 def userProfilePage(request):
     
     context = {}
-    basicContext(request, context)
-    
+    Mini.basic_context(Mini(), request, context)
     context['title'] = _('user profile')
     context['page_title'] = _('user profile')
     context['submit_button'] = _('save')
