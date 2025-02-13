@@ -87,6 +87,9 @@
     </style>
     {% endif %}
 
+    {% block top_js %}
+    {% endblock %}
+
 </head>
 
 <body class="mini {{ body_classes }}">
@@ -122,7 +125,7 @@
     {% block header %}
     <header id="header" class="header fixed scroll-wh {% if not messages %}{{ header_classes }}{% endif %}">
         <div class="container">
-            <div class="boxes align-items-center justify-content-between">
+            <div class="boxes py-1 align-items-center justify-content-between">
                 {% block branding %}
                 <div class="box brand">
                     <a href="{% url 'home' %}" class="">
@@ -201,7 +204,7 @@
             <div class="container fw">
                 <div class="container">
                     <div class="boxes space-top menu-open-p-0">
-                        <div class="box box-100">
+                        <div class="box-100">
                             {% if page_title %}<h1 class="m-0">{{ page_title|safe|capfirst }}</h1>{% endif %}
                             {% if page_subtitle %}<h2 class="m-0">{{ page_subtitle|capfirst }}</h2>{% endif %}
                         </div>
@@ -214,9 +217,9 @@
             {% if messages %}
             <section id="messages" class="container fw" \style="position:absolute; z-index:1;">
                 <div class="container">
-                    <div class="boxes align-items-start">
+                    <div class="boxes mb-2">
                         {% for message in messages %}
-                        <div class="box box-100 b-rad-5 alert {% if message.tags %}{{ message.tags }}-bg wh-text{% endif %}" role="alert">
+                        <div class="box-100 b-rad-5 alert {% if message.tags %}{{ message.tags }}-bg wh-text{% endif %}" role="alert">
                             <p class="{% if message.tags %}wh-text{% endif %}">
                                 {{ message|capfirst }}
                             </p>
@@ -232,7 +235,7 @@
             <section id="quick-content" class="container fw">
                 <div class="container">
                     <div class="boxes align-items-start {% if not page_title and not messages %}space-top{%endif%}">
-                        <div class="box box-100 {{ quick_content_wr_class }}">
+                        <div class="box-100 {{ quick_content_wr_class }}">
                             <p class="{{ quick_content_class }}">{{ quick_content }}</p>
                         </div>
                     </div>
@@ -245,7 +248,7 @@
             <section id="content" class="container fw page-menu">
                 <div class="container">
                     <div class="boxes fh {% if not page_title and not messages and not quick_content %}space-top-bot{%endif%}">
-                        <div class="box box-100">
+                        <div class="box-100">
 
                             <h1 class="m-0 light">Default <span class="color-text"><span class="bold">mini</span>mal</span> home page!</h1>
 
@@ -314,7 +317,7 @@
     <footer id="footer" class="footer">
         <div class="container space-top-bot">
             <div class="boxes">
-                <div class="box box-33 footer-info">
+                <div class="box-33 footer-info">
                     {% block footer_info %}
 
                     {% if company_variables.company %}<p class="">{% now "Y" %}&nbsp;©&nbsp;<span class="bold">{{ company_variables.company }}</span></p>{% endif %}
@@ -327,12 +330,12 @@
 
                     {% endblock %}
                 </div>
-                <div class="box box-33 footer-logo">
+                <div class="box-33 footer-logo">
                     {% block footer_logo %}
                     <a href="{% url 'home' %}" class=""><img src="https://mini.uwa.agency/img/brand/mini_emblem.svg" class="logo emblem" alt="emblem"/></a>
                     {% endblock %}
                 </div>
-                <div class="box box-33 footer-menu">
+                <div class="box-33 footer-menu">
                     {% block footer_menu %}
                     {% endblock %}
                     {% block gdpr_menu %}
@@ -349,7 +352,7 @@
         <div class="container fw fw-bg">
             <div class="container">
                 <div class="boxes">
-                    <div class="box box-100 mv-0 p-05">
+                    <div class="box-100 mv-0 p-05">
                         <style>
                             .hover-col img{
                                 filter: brightness(0) opacity(0.75);

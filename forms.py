@@ -13,7 +13,7 @@ class MiniDataList(forms.widgets.ChoiceWidget):
     template_name = 'mini/forms/widgets/datalist.html'
     option_template_name = 'mini/forms/widgets/datalist_option.html'
     add_id_index = False
-    option_inherits_attrs = False
+    option_inherits_attrs = True
     
     def optgroups(self, name, value, attrs=None):
         """Return a list of optgroups for this widget."""

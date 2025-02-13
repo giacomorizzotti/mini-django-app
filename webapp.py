@@ -82,7 +82,6 @@ class Mini:
         if hasattr(settings, 'SCROLL_LOGO_HEIGHT'):
             self.scroll_logo_height = settings.SCROLL_LOGO_HEIGHT
 
-        
         self.main_color = None
         if hasattr(settings, 'MAIN_COLOR'):
             self.main_color = settings.MAIN_COLOR
@@ -141,6 +140,24 @@ class Mini:
         self.theme_color = self.main_color
         if hasattr(settings, 'THEME_COLOR'):
             self.theme_color = settings.THEME_COLOR
+            
+        if hasattr(settings, 'MINI_CSS_CDN'):
+            self.mini_css_cdn = settings.MINI_CSS_CDN
+        if hasattr(settings, 'MINI_JS_CDN'):
+            self.mini_js_cdn = settings.MINI_JS_CDN
+            
+        if hasattr(settings, 'MINI_GDPR'):
+            self.mini_gdpr = settings.MINI_GDPR
+        if hasattr(settings, 'MINI_GDPR_CDN'):
+            self.mini_gdpr_cdn = settings.MINI_GDPR_CDN
+        if hasattr(settings, 'MINI_SLIDER'):
+            self.mini_slider = settings.MINI_GDPR
+        if hasattr(settings, 'MINI_SLIDER_CDN'):
+            self.mini_slider_cdn = settings.MINI_GDPR_CDN
+        if hasattr(settings, 'MINI_DEBUG'):
+            self.mini_debug = settings.MINI_GDPR
+        if hasattr(settings, 'MINI_DEBUG_CDN'):
+            self.mini_debug_cdn = settings.MINI_GDPR_CDN
         
         self.AOS = True
 

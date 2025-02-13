@@ -1,4 +1,21 @@
-<input type="{{ widget.type }}" name="{{ widget.name }}" list="{{ widget.name }}-list"{% if widget.value != None %} value="{{ widget.value|stringformat:'s' }}"{% endif %}{% include "django/forms/widgets/attrs.html" %}>
+<input type="text" id="{{widget.attrs.id}}-readable" list="{{ widget.name }}-list"{% if widget.value != None %} value="{{ widget.value|stringformat:'s' }}"{% endif %} >
+<input type="hidden" name="{{ widget.name }}" list="{{ widget.name }}-list"{% if widget.value != None %} value="{{ widget.value|stringformat:'s' }}"{% endif %}{% include "django/forms/widgets/attrs.html" %}>
+
+<script>
+var readableField_{{widget.attrs.id}}=document.getElementById('{{widget.attrs.id}}-readable')
+document.addEventListener('DOMContentLoaded', function() {
+  readableField_{{widget.attrs.id}}.value=document.getElementById('{{ widget.attrs.id }}_dl_option_'+readableField_{{widget.attrs.id}}.value).getAttribute('label')
+})
+readableField_{{widget.attrs.id}}.addEventListener('change', function() {
+  document.getElementById('{{widget.attrs.id}}').value=this.value
+  if (document.getElementById('{{ widget.attrs.id }}_dl_option_'+this.value)) {
+    this.value=document.getElementById('{{ widget.attrs.id }}_dl_option_'+this.value).getAttribute('label')
+  }
+})
+readableField_{{widget.attrs.id}}.addEventListener('focus', function() {
+  this.value = ''
+})
+</script>
 
 <datalist id="{{ widget.name }}-list"{% include "django/forms/widgets/attrs.html" %}>{% for group_name, group_choices, group_index in widget.optgroups %}{% if group_name %}
   <optgroup label="{{ group_name }}">{% endif %}{% for option in group_choices %}
