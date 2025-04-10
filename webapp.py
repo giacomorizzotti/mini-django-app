@@ -309,6 +309,7 @@ class Mini:
     def basic_context(self, request, context):
 
         pwa_installed = 'pwa' in settings.INSTALLED_APPS
+        context['pwa_installed'] = pwa_installed
         
         context['mini_css_cdn'] = self.get_mini_css_cdn()
         context['mini_js_cdn'] = self.get_mini_js_cdn()
