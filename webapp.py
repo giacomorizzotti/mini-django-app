@@ -307,6 +307,8 @@ class Mini:
     
     @staticmethod
     def basic_context(self, request, context):
+
+        pwa_installed = 'pwa' in settings.INSTALLED_APPS
         
         context['mini_css_cdn'] = self.get_mini_css_cdn()
         context['mini_js_cdn'] = self.get_mini_js_cdn()
